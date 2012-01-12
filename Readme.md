@@ -10,4 +10,6 @@ By adding the queryparameter allowCookies=on or disallowCookies=on cookies will 
 - The HttpModule can be configured to work on a limited number of hostnames, just add them as a comma separated list in the app-setting "CookieRestrictions.ValidHostnames"
 - The javascript is placed in \resources\js\CookieRestrictions.js and must be included manualy if needed
 
+Install from nuget with "PM> Install-Package CookieRestrictions"
+
 1508 / Design in Love with Technology
