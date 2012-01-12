@@ -1,0 +1,10 @@
+<configuration>
+	<appSettings>
+		<add key="CookieRestrictions.ValidHostnames" value=""/>
+	</appSettings>
+	<system.webServer>
+		<modules>
+			<add type="CookieRestrictions.HttpModules.CookieRestrictionModule, CookieRestrictions" name="CookieRestrictionsModule"/>
+		</modules>
+	</system.webServer>
+</configuration>

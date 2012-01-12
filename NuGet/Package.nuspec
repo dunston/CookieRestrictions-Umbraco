@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package>
+	<metadata>
+		<id>CookieRestrictions</id>
+		<version>1.0</version>
+		<authors>Ole Thorsager @ 1508.dk</authors>
+		<owners>1508 A/S</owners>
+		<licenseUrl>http://creativecommons.org/licenses/by/3.0/</licenseUrl>
+		<projectUrl>https://github.com/1508/CookieRestrictions</projectUrl>
+		<iconUrl>http://www.nuget.org/Content/Images/packageDefaultIcon-50x50.png</iconUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<summary>Can disable/enable cookies on a website</summary>
+		<description>
+			By adding the queryparameter allowCookies=on or disallowCookies=on cookies will be disabled or enabled.
+			
+			- On the server side a http-module attached to the ResponseEnd event will clear all cookies if they are not enabled
+			- On the client side a javascript will wait 1200 milliseconds before clearing all cookies which may have been set via 3rd party javascript includes (such as google analytics)			
+			- The HttpModule can be configured to work on a limited number of hostnames, just add them as a comma separated list in the app-setting "CookieRestrictions.ValidHostnames"
+			- The javascript is placed in \resources\js\CookieRestrictions.js and must be included manualy if needed
+		</description>
+		<releaseNotes>Version 1.0 - Initial release.</releaseNotes>
+		<copyright>http://creativecommons.org/licenses/by/3.0/</copyright>
+		<tags>Cookies</tags>
+		<dependencies>
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="**\*.*" exclude="Build-NuGet-Package.cmd;NuGet.exe" />
+	</files>
+</package>
