@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web;
 using CookieRestrictions.Configuration;
+using CookieRestrictions.Context;
 
 namespace CookieRestrictions.HttpModules
 {
@@ -25,15 +26,18 @@ namespace CookieRestrictions.HttpModules
                 return;
             }
 
-            string hostname = HttpContext.Current.Request.ServerVariables["SERVER_NAME"];
-            if (string.IsNullOrEmpty(hostname) || (CookieRestrictionsConfig.Instance.ValidHostnames.Count > 0 && !CookieRestrictionsConfig.Instance.ValidHostnames.Contains(hostname)))
+            if (!CookieRestrictionsContext.Instance.HostnameIsValid)
+            {
+                // The javascript should also not be rendered in this case (a workaound could be to set the allowCookies cookie for the current session and allow the script to be called anyway, but its cleaner not to render it at all)
                 return;
+            }
 
             // Get or Set the cookies allowed cookie
-            bool disallowCookies = GetRequestVar(CookieRestrictionsConfig.Instance.CookiesNotAllowedkey) == "on";
-            HttpCookie allowCookie = HttpContext.Current.Request.Cookies.Get(CookieRestrictionsConfig.Instance.CookiesAllowedKey);
-            if (allowCookie == null && GetRequestVar(CookieRestrictionsConfig.Instance.CookiesAllowedKey) == "on" && !disallowCookies)
-            {
+            bool disallowCookiesOn = GetRequestVar(CookieRestrictionsConfig.Instance.CookiesNotAllowedkey) == "on";
+            bool allowCookiesOn = GetRequestVar(CookieRestrictionsConfig.Instance.CookiesAllowedKey) == "on";
+            HttpCookie allowCookie = HttpContext.Current.Request.Cookies.Get(CookieRestrictionsConfig.Instance.CookiesAllowedKey);            
+            if (allowCookie == null && allowCookiesOn && !disallowCookiesOn)
+            {                
                 allowCookie = new HttpCookie(CookieRestrictionsConfig.Instance.CookiesAllowedKey, "on");
                 allowCookie.Expires = DateTime.MaxValue;
                 allowCookie.HttpOnly = false;
@@ -41,7 +45,7 @@ namespace CookieRestrictions.HttpModules
             }
             
             // Return if cookies are allowed
-            if (allowCookie != null && allowCookie.Value == "on" && !disallowCookies)
+            if (allowCookie != null && allowCookie.Value == "on" && !disallowCookiesOn)
                 return;                        
 
             // Otherwise

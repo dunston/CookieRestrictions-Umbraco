@@ -37,6 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\CookieRestrictionsConfig.cs" />
+    <Compile Include="Context\CookieRestrictionsContext.cs" />
     <Compile Include="HttpModules\CookieRestrictionModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
