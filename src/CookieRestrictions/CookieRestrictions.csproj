@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\NuGet\lib\net20\</OutputPath>
+    <OutputPath>bin\debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -26,20 +26,33 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\NuGet\lib\net20\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="businesslogic">
+      <HintPath>..\Lib\businesslogic.dll</HintPath>
+    </Reference>
+    <Reference Include="cms">
+      <HintPath>..\Lib\cms.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions">
+      <HintPath>..\Lib\System.Web.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="umbraco">
+      <HintPath>..\Lib\umbraco.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\CookieRestrictionsConfig.cs" />
     <Compile Include="Context\CookieRestrictionsContext.cs" />
     <Compile Include="HttpModules\CookieRestrictionModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CookieUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <ContentFiles Include="resources\**\*.*" />
